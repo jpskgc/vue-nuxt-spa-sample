@@ -1,0 +1,6 @@
+version: 0.2
+
+phases:
+  setup:
+    commands:
+      - echo this is test.
