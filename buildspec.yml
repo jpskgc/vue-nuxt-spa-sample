@@ -6,10 +6,6 @@ env:
     DOCKERHUB_PASS: arn:aws:secretsmanager:ap-northeast-1:$AWS_ACCOUNT_ID:secret:dws-docker-6KBPtw:DOCKERHUB_PASS
 
 phases:
-  pre_build:
-    commands:
-      - echo Logging in to Docker Hub...
-      - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
   build:
     commands:
       - echo this is test.
