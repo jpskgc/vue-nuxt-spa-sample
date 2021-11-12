@@ -9,6 +9,7 @@ phases:
   install:
     commands:
       - apt-get update && apt-get install -y curl vim-tiny make
+      - apt install -y python3-pip
       - pip install docker-compose
       - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
       - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
