@@ -1,9 +1,19 @@
 version: 0.2
 
+env:
+  secrets-manager:
+    DOCKERHUB_USER: arn:aws:secretsmanager:ap-northeast-1:$AWS_ACCOUNT_ID:secret:dws-docker-6KBPtw:DOCKERHUB_USER
+    DOCKERHUB_PASS: arn:aws:secretsmanager:ap-northeast-1:$AWS_ACCOUNT_ID:secret:dws-docker-6KBPtw:DOCKERHUB_PASS
+
 phases:
   install:
-    runtime-versions:
-      nodejs: 14.x
+    commands:
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+  pre_build:
+    commands:
+      - echo Logging in to Docker Hub...
+      - echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
   build:
     commands:
       - echo this is test.
