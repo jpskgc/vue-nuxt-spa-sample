@@ -1,4 +1,4 @@
 export default {
-    target: 'static',
-    ssr: false,
-}
+  target: 'static',
+  ssr: false,
+}  

@@ -9,3 +9,13 @@ phases:
   build:
     commands:
       - echo this is test.
+      - sudo apt-get update -y
+      - sudo apt-get upgrade -y
+      - sudo apt install -y python-pip python-dev && sudo pip install awscli
+  pre_build:
+    commands:
+      - yarn install --frozen-lockfile
+  build:
+    commands:
+      - yarn generate
+      - aws s3 sync --delete ./dist s3://$DEV_S3BUCKET_NAME
