@@ -1,9 +1,15 @@
 <template>
-  <main>
-    <h1>Home page</h1>
-    <NuxtLink to="/about">
-      About (internal link that belongs to the Nuxt App)
-    </NuxtLink>
-    <a href="https://nuxtjs.org">External Link to another page</a>
-  </main>
+  <Home />
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator';
+import Home from '~/components/home/index.vue';
+
+@Component({
+  components: {
+    Home,
+  },
+})
+export default class Index extends Vue {}
+</script>
